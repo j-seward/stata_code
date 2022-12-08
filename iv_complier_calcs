@@ -1,0 +1,18 @@
+* D is the treat variable
+* Y is the outcome of interest
+* Z is the instrument
+* X is 
+
+* to find complier means
+gen D_comp = 1 - D
+gen YD_comp = Y*(1-D)
+
+* beta is complier mean for outcome of interest
+*   should add in control variables, fixed effects, and clusters as needed
+ivreghdfe YD_comp (D_comp = Z) X
+
+
+* if continuous...
+*   need kappa weighting
+reghdfe Z X, predict(pZ)
+gen k = 1 - D(1-Z)/(1-pZ) - (1-D)*Z/pZ
