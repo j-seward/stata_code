@@ -16,3 +16,4 @@ ivreghdfe YD_comp (D_comp = Z) X
 *   need kappa weighting
 reghdfe Z X, predict(pZ)
 gen k = 1 - D(1-Z)/(1-pZ) - (1-D)*Z/pZ
+sum X1 [aw = k]
